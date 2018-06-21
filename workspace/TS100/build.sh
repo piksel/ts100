@@ -1,37 +1,19 @@
+#!/bin/bash
+
+set -e
+
+build() {
+	make -j 16 lang=$1
+}
+
 make clean
-make -j16 lang=EN
-rm -rf Objects/src
-make -j16 lang=CS_CZ
-rm -rf Objects/src
-make -j16 lang=DE
-rm -rf Objects/src
-make -j16 lang=DK
-rm -rf Objects/src
-make -j16 lang=ES
-rm -rf Objects/src
-make -j16 lang=FR
-rm -rf Objects/src
-make -j16 lang=HR
-rm -rf Objects/src
-make -j16 lang=IT
-rm -rf Objects/src
-make -j16 lang=PL
-rm -rf Objects/src
-make -j16 lang=RU
-rm -rf Objects/src
-make -j16 lang=FI
-rm -rf Objects/src
-make -j16 lang=TR
-rm -rf Objects/src
-make -j16 lang=BG
-rm -rf Objects/src
-make -j16 lang=SK
-rm -rf Objects/src
-make -j16 lang=HUN
-rm -rf Objects/src
-make -j16 lang=BR
-rm -rf Objects/src
-make -j16 lang=LT
-rm -rf Objects/src
-make -j16 lang=UA
-rm -rf Objects/src
+
+if [[ -n "$1" ]]; then
+	build $1
+	exit 0
+fi
+
+for lang in EN CS_CZ DE DK ES FR HR IT PL RU FI TR BG SK HUN BR LT UA SV ; do
+	build $lang
+	rm -rf Objects/src
+done
